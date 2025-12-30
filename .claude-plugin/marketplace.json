@@ -1,0 +1,21 @@
+{
+  "name": "devbanhmi-marketplace",
+  "owner": {
+    "name": "gaupoit",
+    "email": "hello@devbanhmi.com"
+  },
+  "plugins": [
+    {
+      "name": "programming-advisor",
+      "source": ".",
+      "description": "Build vs Buy advisor that searches for existing solutions before vibe coding. Prevents reinventing the wheel.",
+      "version": "1.0.0",
+      "author": {
+        "name": "gaupoit"
+      },
+      "homepage": "https://github.com/gaupoit/programming-advisor",
+      "repository": "https://github.com/gaupoit/programming-advisor",
+      "license": "MIT"
+    }
+  ]
+}

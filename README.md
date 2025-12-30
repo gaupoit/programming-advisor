@@ -13,18 +13,26 @@ This skill acts as a "Reinventing the Wheel" detector. When you describe somethi
 
 ## Installation
 
-### From Claude Code Marketplace
+### As a Plugin (Recommended)
 
 ```bash
-claude skill install @gaupoit/programming-advisor
+# Add the marketplace
+/plugin marketplace add gaupoit/programming-advisor
+
+# Install the plugin
+/plugin install programming-advisor
 ```
 
 ### Manual Installation
 
-Clone this repository into your Claude Code skills directory:
+Clone this repository:
 
 ```bash
-git clone https://github.com/gaupoit/programming-advisor.git ~/.claude/skills/programming-advisor
+git clone https://github.com/gaupoit/programming-advisor.git
+cd programming-advisor
+
+# Install as local plugin
+claude --plugin-dir .
 ```
 
 ## Usage
@@ -70,8 +78,8 @@ Use pdf-lib for most use cases...
 
 ## Reference Files
 
-- `references/common-solutions.md` - Exhaustive list of commonly reinvented wheels
-- `references/token-estimates.md` - Detailed token burn estimates by task type
+- `skills/programming-advisor/references/common-solutions.md` - Exhaustive list of commonly reinvented wheels
+- `skills/programming-advisor/references/token-estimates.md` - Detailed token burn estimates by task type
 
 ## Philosophy
 
