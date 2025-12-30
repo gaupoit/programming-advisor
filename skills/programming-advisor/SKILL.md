@@ -4,9 +4,10 @@ description: >
   Anti-reinventing-the-wheel advisor that helps users evaluate build vs buy decisions before vibe coding.
   Use when users describe something they want to build, create, or develop - especially features, tools,
   apps, scripts, or systems. Searches for existing solutions, estimates vibe coding costs (tokens, time,
-  complexity), and presents comparison tables to enable informed decisions. Triggers on: "I want to build...",
-  "Help me create...", "Can you code...", "I need a [tool/app/script]...", project planning, feature requests,
-  or any coding task that might have existing solutions.
+  complexity), and presents comparison tables to enable informed decisions. When user accepts a recommendation,
+  provides complete integration planning with install commands, starter code, and project-specific guidance.
+  Triggers on: "I want to build...", "Help me create...", "Can you code...", "I need a [tool/app/script]...",
+  project planning, feature requests, or any coding task that might have existing solutions.
 ---
 
 # Programming Advisor - "Reinventing the Wheel" Detector
@@ -87,6 +88,66 @@ If user chooses to build after seeing alternatives:
 3. Recommend libraries for sub-components
 4. Provide a hybrid approach when possible
 
+### Step 7: Integration Planning (When User Accepts Recommendation)
+
+When the user accepts a recommended solution, provide a complete integration plan:
+
+#### 7.1 Detect Project Context
+
+Before generating the plan, analyze the user's project:
+- **Package manager**: Check for `package.json` (npm/yarn/pnpm), `requirements.txt`/`pyproject.toml` (pip/poetry), `Cargo.toml` (cargo), `go.mod` (go)
+- **Framework**: Identify React, Vue, Next.js, Rails, Django, FastAPI, etc.
+- **Existing dependencies**: Check for conflicts or complementary packages
+- **Project structure**: Understand where new code should live (src/, lib/, app/, etc.)
+- **Code style**: Match existing patterns (TypeScript vs JS, ESM vs CJS, etc.)
+
+#### 7.2 Generate Installation Commands
+
+Provide ready-to-run commands for the detected package manager:
+
+```bash
+# npm
+npm install <package>
+
+# yarn
+yarn add <package>
+
+# pnpm
+pnpm add <package>
+
+# pip
+pip install <package>
+
+# poetry
+poetry add <package>
+```
+
+#### 7.3 Provide Integration Steps
+
+Create a numbered action plan:
+1. **Install dependencies** - Exact commands
+2. **Create/update config files** - If the library needs configuration
+3. **Add to existing code** - Where to import and initialize
+4. **Create new files** - With suggested file paths matching project structure
+5. **Update related files** - Any existing files that need modification
+
+#### 7.4 Generate Starter Code
+
+Provide code scaffolding that:
+- Matches the user's detected code style (TypeScript/JavaScript, etc.)
+- Uses their existing patterns and conventions
+- Includes necessary imports
+- Shows basic usage with comments
+- Handles common edge cases
+
+#### 7.5 Warn About Potential Issues
+
+Flag any concerns:
+- **Dependency conflicts**: "Note: This requires React 18+, you have React 17"
+- **Breaking changes**: "This library had major changes in v3, examples are for v3"
+- **Peer dependencies**: "You'll also need to install X"
+- **Config requirements**: "Requires adding to your tsconfig/babel/webpack config"
+
 ## Response Template
 
 ```
@@ -118,6 +179,53 @@ I found [N] existing solutions before we write custom code:
 [Only if user wants custom solution - suggest hybrid approach]
 ```
 
+### Integration Plan Template (When User Accepts)
+
+When the user says "let's use [recommended solution]" or "how do I add this?", respond with:
+
+```
+## 🚀 Integration Plan: [Solution Name]
+
+### Your Project Context
+- **Detected**: [framework], [package manager], [language]
+- **Project structure**: [src/app/lib layout]
+
+### Step 1: Install Dependencies
+
+\`\`\`bash
+[exact install command for their package manager]
+\`\`\`
+
+### Step 2: Configuration (if needed)
+
+[Any config file changes needed]
+
+### Step 3: Create New Files
+
+📁 `[suggested/file/path.ts]`
+\`\`\`typescript
+[starter code matching their project style]
+\`\`\`
+
+### Step 4: Update Existing Files
+
+📝 `[existing/file/to/modify.ts]`
+\`\`\`typescript
+// Add this import
+import { X } from '[package]'
+
+// Use it like this
+[integration code]
+\`\`\`
+
+### ⚠️ Notes
+- [Any warnings about versions, conflicts, or requirements]
+
+### 📚 Resources
+- [Official docs link]
+- [Relevant examples]
+```
+
 ## Anti-Patterns to Flag
 
 Alert users when they're about to reinvent:
@@ -144,3 +252,5 @@ Alert users when they're about to reinvent:
 See [references/token-estimates.md](references/token-estimates.md) for detailed breakdowns.
 
 See [references/common-solutions.md](references/common-solutions.md) for exhaustive list of commonly reinvented wheels.
+
+See [references/integration-patterns.md](references/integration-patterns.md) for project detection and starter code patterns.
