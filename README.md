@@ -10,6 +10,7 @@ This skill acts as a "Reinventing the Wheel" detector. When you describe somethi
 2. **Estimate vibe coding costs** - Token burn, development time, maintenance burden
 3. **Present a comparison table** - Side-by-side analysis of all options
 4. **Make a recommendation** - When to use existing solutions vs. build custom
+5. **Plan the integration** - When you accept a recommendation, get complete setup instructions tailored to your project
 
 ## Installation
 
@@ -52,34 +53,76 @@ Or invoke it directly:
 
 ## Example Output
 
-```
-## Existing Solutions Found
+### Step 1: You ask to build something
 
-I found 5 existing solutions before we write custom code:
+> "I want to add form validation to my LoginForm"
+
+```
+## 🔍 Existing Solutions Found
 
 ### Libraries/Packages
-- **pdf-lib**: Create and modify PDFs | 6.5K stars | npm
+- **Zod**: TypeScript-first schema validation | 35K+ stars
+- **React Hook Form**: Performant form library | 41K+ stars
 
-### SaaS Options
-- **DocRaptor**: HTML to PDF API | From $15/mo
-
-## Build vs Buy Comparison
+## 📊 Build vs Buy Comparison
 
 | Option | Type | Cost | Setup | Maintenance | Est. Tokens |
 |--------|------|------|-------|-------------|-------------|
-| pdf-lib | Library | Free | 10 min | Updates | 0 |
-| DocRaptor | SaaS | $15/mo | 5 min | None | 0 |
-| Custom | Build | Free | 4-8 hrs | High | ~50K |
+| Zod + RHF | Library | Free | 15 min | Updates | ~2K |
+| Custom | Build | Free | 1-2 hrs | High | ~15-30K |
 
-## Recommendation
+## 💡 Recommendation
 
-Use pdf-lib for most use cases...
+Use Zod + React Hook Form...
+```
+
+### Step 2: You accept the recommendation
+
+> "Let's use Zod with React Hook Form"
+
+```
+## 🚀 Integration Plan: Zod + React Hook Form
+
+### Your Project Context
+- **Detected**: Next.js 14, pnpm, TypeScript
+- **Project structure**: src/app/, src/components/
+
+### Step 1: Install Dependencies
+pnpm add zod react-hook-form @hookform/resolvers
+
+### Step 2: Create New Files
+📁 src/schemas/login.ts
+[starter code with your schema]
+
+### Step 3: Update Existing Files
+📝 src/components/LoginForm.tsx
+[integration code matching your style]
+
+### ⚠️ Notes
+- React Hook Form v7+ requires React 16.8+ ✅
 ```
 
 ## Reference Files
 
-- `skills/programming-advisor/references/common-solutions.md` - Exhaustive list of commonly reinvented wheels
-- `skills/programming-advisor/references/token-estimates.md` - Detailed token burn estimates by task type
+- `references/common-solutions.md` - Exhaustive list of commonly reinvented wheels
+- `references/token-estimates.md` - Detailed token burn estimates by task type
+- `references/integration-patterns.md` - Project detection and starter code patterns
+
+## Features
+
+### Build vs Buy Analysis
+- Searches npm, pip, cargo, and other package ecosystems
+- Finds open source tools and SaaS alternatives
+- Estimates token burn for custom implementations
+- Presents clear comparison tables
+
+### Integration Planning (v1.1.0)
+When you accept a recommendation, the plugin:
+- **Detects your project** - Package manager, framework, TypeScript/JavaScript
+- **Generates install commands** - Exact commands for npm/yarn/pnpm/pip/etc.
+- **Creates starter code** - Matching your project's style and structure
+- **Updates existing files** - Shows how to integrate with your current code
+- **Warns about conflicts** - Version requirements and peer dependencies
 
 ## Philosophy
 
