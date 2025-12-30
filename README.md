@@ -36,6 +36,18 @@ cd programming-advisor
 claude --plugin-dir .
 ```
 
+## Demo
+
+Try the plugin with our sample project:
+
+```bash
+git clone https://github.com/gaupoit/dont-reinvent-the-wheel-demo.git
+cd dont-reinvent-the-wheel-demo
+claude
+```
+
+Then ask: *"I want to add form validation to my LoginForm component"*
+
 ## Usage
 
 The skill triggers automatically when you describe something you want to build:
