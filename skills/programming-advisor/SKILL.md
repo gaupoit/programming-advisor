@@ -4,8 +4,9 @@ description: >
   Anti-reinventing-the-wheel advisor that helps users evaluate build vs buy decisions before vibe coding.
   Use when users describe something they want to build, create, or develop - especially features, tools,
   apps, scripts, or systems. Searches for existing solutions, estimates vibe coding costs (tokens, time,
-  complexity), and presents comparison tables to enable informed decisions. When user accepts a recommendation,
-  provides complete integration planning with install commands, starter code, and project-specific guidance.
+  complexity), and presents comparison tables to enable informed decisions. Includes total cost of ownership
+  analysis comparing Year 1 vs Year 3 costs for SaaS vs DIY. When user accepts a recommendation, provides
+  complete integration planning with install commands, starter code, and project-specific guidance.
   Triggers on: "I want to build...", "Help me create...", "Can you code...", "I need a [tool/app/script]...",
   project planning, feature requests, or any coding task that might have existing solutions.
 ---
@@ -148,6 +149,66 @@ Flag any concerns:
 - **Peer dependencies**: "You'll also need to install X"
 - **Config requirements**: "Requires adding to your tsconfig/babel/webpack config"
 
+### Step 8: Cost Analysis (For Significant Decisions)
+
+For features with meaningful cost implications (auth, payments, email, infrastructure), provide a Total Cost of Ownership (TCO) comparison.
+
+#### 8.1 When to Include Cost Analysis
+
+Include cost table when:
+- SaaS options have monthly fees > $10
+- DIY token estimate > 50K tokens
+- User asks about costs or "is it worth it"
+- Comparing multiple paid services
+- Security-sensitive features (auth, payments)
+
+#### 8.2 Cost Calculation
+
+Use the pricing reference: [references/pricing-data.md](references/pricing-data.md)
+
+**Formula:**
+```
+Year N Cost = Setup Cost + (Monthly × 12 × N) + (Maintenance × N)
+
+Where:
+- Setup Cost (DIY) = Token Estimate × $0.015/1K tokens
+- Maintenance (DIY) = 20% of Setup Cost annually
+- Maintenance (SaaS) = $0
+```
+
+#### 8.3 Cost Table Format
+
+```markdown
+## 💰 Cost Analysis
+
+| Option | Setup | Monthly | Year 1 | Year 3 | Notes |
+|--------|-------|---------|--------|--------|-------|
+| [SaaS A] | 10min | $25 | $300 | $900 | Free tier: 10K MAU |
+| [SaaS B] | 15min | $35 | $420 | $1,260 | More features |
+| [Free/OSS] | 1hr | $0 | $0 | $0 | Self-host required |
+| DIY | Xhrs | $0 | ~$Y | ~$Z | + maintenance burden |
+
+💡 **Break-even:** [When DIY becomes cheaper, if ever]
+⚠️ **Hidden costs:** [Security audits, compliance, on-call burden]
+```
+
+#### 8.4 Hidden Costs to Surface
+
+Always mention relevant hidden costs:
+- **Security audits**: $5K-50K for custom auth systems
+- **Compliance**: SOC2, GDPR, PCI implementation time
+- **On-call burden**: DIY = you're the support team
+- **Opportunity cost**: Time not spent on core product
+- **Technical debt**: Custom code needs maintenance forever
+
+#### 8.5 Red Flags to Call Out
+
+Warn users when they say:
+- "It's just a simple auth system" → Auth is never simple
+- "We can build it in a weekend" → You can't, securely
+- "We'll add security later" → Security debt is expensive
+- "It's cheaper long-term" → Usually false under 10K users
+
 ## Response Template
 
 ```
@@ -169,6 +230,15 @@ I found [N] existing solutions before we write custom code:
 | Option | Type | Cost | Setup | Maintenance | Est. Tokens |
 |--------|------|------|-------|-------------|-------------|
 | ... | ... | ... | ... | ... | ... |
+
+## 💰 Cost Analysis (for significant decisions)
+
+| Option | Setup | Monthly | Year 1 | Year 3 | Notes |
+|--------|-------|---------|--------|--------|-------|
+| ... | ... | ... | ... | ... | ... |
+
+💡 **Break-even:** [analysis]
+⚠️ **Hidden costs:** [security, compliance, maintenance]
 
 ## 💡 Recommendation
 
@@ -254,3 +324,5 @@ See [references/token-estimates.md](references/token-estimates.md) for detailed 
 See [references/common-solutions.md](references/common-solutions.md) for exhaustive list of commonly reinvented wheels.
 
 See [references/integration-patterns.md](references/integration-patterns.md) for project detection and starter code patterns.
+
+See [references/pricing-data.md](references/pricing-data.md) for SaaS pricing and cost calculation data.
