@@ -9,8 +9,9 @@ This skill acts as a "Reinventing the Wheel" detector. When you describe somethi
 1. **Search for existing solutions** - Libraries, open source tools, and SaaS options
 2. **Estimate vibe coding costs** - Token burn, development time, maintenance burden
 3. **Present a comparison table** - Side-by-side analysis of all options
-4. **Make a recommendation** - When to use existing solutions vs. build custom
-5. **Plan the integration** - When you accept a recommendation, get complete setup instructions tailored to your project
+4. **Calculate total cost of ownership** - Year 1 vs Year 3 costs for SaaS vs DIY
+5. **Make a recommendation** - When to use existing solutions vs. build custom
+6. **Plan the integration** - When you accept a recommendation, get complete setup instructions tailored to your project
 
 ## Installation
 
@@ -119,6 +120,7 @@ pnpm add zod react-hook-form @hookform/resolvers
 - `references/common-solutions.md` - Exhaustive list of commonly reinvented wheels
 - `references/token-estimates.md` - Detailed token burn estimates by task type
 - `references/integration-patterns.md` - Project detection and starter code patterns
+- `references/pricing-data.md` - SaaS pricing and cost calculation data
 
 ## Features
 
@@ -135,6 +137,22 @@ When you accept a recommendation, the plugin:
 - **Creates starter code** - Matching your project's style and structure
 - **Updates existing files** - Shows how to integrate with your current code
 - **Warns about conflicts** - Version requirements and peer dependencies
+
+### Cost Calculator (v1.2.0)
+For significant decisions (auth, payments, email), get TCO analysis:
+
+```
+| Option | Setup | Monthly | Year 1 | Year 3 | Notes |
+|--------|-------|---------|--------|--------|-------|
+| Auth0 | 10min | $35 | $420 | $1,260 | Free: 7.5K MAU |
+| Clerk | 10min | $25 | $300 | $900 | Free: 10K MAU |
+| DIY | 8hrs | $0 | ~$1,500 | ~$2,100 | + maintenance |
+
+💡 Break-even: DIY only cheaper at >100K MAU
+⚠️ Hidden costs: Security audits, compliance, on-call
+```
+
+Includes pricing data for: Auth, Email, Payments, Database, Storage, Search, Monitoring, Analytics, AI/LLM, Cron jobs
 
 ## Philosophy
 
