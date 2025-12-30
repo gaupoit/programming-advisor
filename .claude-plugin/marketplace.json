@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "programming-advisor",
-      "source": ".",
+      "source": "./",
       "description": "Build vs Buy advisor that searches for existing solutions before vibe coding. Prevents reinventing the wheel.",
       "version": "1.0.0",
       "author": {
