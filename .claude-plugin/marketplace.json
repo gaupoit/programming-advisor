@@ -10,7 +10,7 @@
       "name": "programming-advisor",
       "source": "./",
       "description": "Build vs Buy advisor that searches for existing solutions before vibe coding. Prevents reinventing the wheel.",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "author": {
         "name": "gaupoit"
       },
